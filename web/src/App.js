@@ -1,14 +1,17 @@
+import { useEffect, useState } from 'react';
 import './App.css';
+import useGameStateSocket from './hooks/useGameStateSocket';
+import Empty from './views/Empty';
+import GameState from './views/Game';
+
 
 function App() {
+  const gameState = useGameStateSocket('ws://localhost:8080');
+  const view = gameState != null ? <GameState gameState={gameState} /> : <Empty />;
+
   return (
     <div className="App">
-      <div className="Question">What is 2 + 2?</div>
-      <div className="Answers">
-        <div className="Answer AnswerA">4</div>
-        <div className="Answer AnswerB">Party says 5 🙉</div>
-        <div className="Answer AnswerC">Depends</div>
-      </div>
+      {view}
     </div>
   );
 }

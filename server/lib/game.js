@@ -8,7 +8,7 @@ const STATES = {
 
 const logger = createLogger('game');
 
-function createGame(questions, stateChangeCallback, { answerDisplayTimeoutMs = 5 * 1000 } = {}) {
+function createGame(questions, stateChangeCallback, { answerDisplayTimeoutMs = 8 * 1000 } = {}) {
     if (!questions || questions.length < 1)
         throw Error('Must initialize game with some questions');
 

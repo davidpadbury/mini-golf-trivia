@@ -1,0 +1,25 @@
+esphome:
+  name: ball-sensor
+
+esp32:
+  board: wemos_d1_mini32
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+    
+binary_sensor:
+  - platform: gpio
+    pin: 16
+    name: "Ball Sensor 0"
+    id: ball_sensor_0
+    device_class: motion
+    filters:
+      - invert:
+    on_press:
+      then:
+        - logger.log:
+            # we'll look for this pattern in the serial output for detecting the ball
+            tag: BallDetected
+            format: "Ball(0)"

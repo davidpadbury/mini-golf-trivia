@@ -1,5 +1,7 @@
 import { STATES } from './game.js';
 import { createLogger } from './logging.js';
+import { RegexParser, SerialPort } from 'serialport';
+import { ReadlineParser } from '@serialport/parser-readline'
 
 const logger = createLogger('answers');
 
@@ -34,6 +36,44 @@ function createMockAnswerInterface(guessCallback, { minGuessTimeMs = 2000, maxGu
     };
 }
 
+const ballDetectedRegex = /Ball\((\d+)\)/;
+
+function createSerialAnswerInterface(path, guess, baudRate = 115200) {
+    function handleLine(line) {
+        // only look at lines coming from our logger
+        if (line.indexOf('BallDetected') < 0) return;
+
+        const match = ballDetectedRegex.exec(line);
+
+        if (match) {
+            const ballText = match[1];
+            const ball = parseInt(ballText, 10);
+            logger.info(`Ball Detected: ${ball}`);
+            guess(ball);
+        }
+    }
+
+    const port = new SerialPort({
+        path: path,
+        baudRate: baudRate
+    });
+    const parser = port.pipe(new ReadlineParser());
+
+    port.on('open', () => logger.debug('Serial port open'));
+    port.on('close', () => logger.debug('Serial port closed'));
+
+    parser.on('data', handleLine);
+
+    function updateState(newState) {
+        // don't really need to do much the other way currently
+    }
+
+    return {
+        updateState
+    }
+}
+
 export {
-    createMockAnswerInterface
+    createMockAnswerInterface,
+    createSerialAnswerInterface
 };

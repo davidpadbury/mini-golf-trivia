@@ -49,6 +49,7 @@ body {
 
 .Answers .Answer .Text {
   flex: 1;
+  font-size: 8vh;
 }
 
 .Answers .Answer .Marker {

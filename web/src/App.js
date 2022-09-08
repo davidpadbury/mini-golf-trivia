@@ -6,7 +6,8 @@ import GameState from './views/Game';
 
 
 function App() {
-  const gameState = useGameStateSocket('ws://localhost:8080');
+  const hostname = window.location.hostname;
+  const gameState = useGameStateSocket(`ws://${hostname}:8080`);
   const view = gameState != null ? <GameState gameState={gameState} /> : <Empty />;
 
   return (

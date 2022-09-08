@@ -10,7 +10,9 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const player = createSoundPlayer();
+const player = createSoundPlayer({
+    players: [ 'mplayer', 'aplay' ]
+});
 const logger = createLogger('sounds');
 
 // always assume we're using the relative sounds directory for now

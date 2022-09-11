@@ -12,6 +12,12 @@ function createAnswerInterface() {
     const serialPortPath = process.env['ANSWERS_SERIAL_PORT_PATH'];
     const guess = idx => game.guess(idx);
 
+    if (serialPortPath) {
+        logger.info(`Using answer provider from serial port [${serialPortPath}]`);
+    } else {
+        logger.info(`Using mocked answer provider`);
+    }
+
     return serialPortPath ? createSerialAnswerInterface(serialPortPath, guess) : createMockAnswerInterface(guess);
 }
 

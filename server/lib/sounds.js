@@ -46,7 +46,7 @@ function playSound(files) {
     
     player.play(file, err => {
         if (!err) logger.debug('Playing sound completed');
-        else logger.error('Playing sound failed')
+        else logger.error('Playing sound failed', err)
     });
 }
 

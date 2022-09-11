@@ -2,20 +2,22 @@ import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 
 function Answer(answer, index, { marker = null, disabled = false } = {}) {
-    const cssClass = 'Answer' + String.fromCharCode(index + 65);
+    const char = String.fromCharCode(index + 65)
+    const cssClass = 'Answer' + char;
+    const answerText = `${char}. ${answer}`;
     const className = [ 'Answer', cssClass, disabled ? 'Disabled' : '' ].join(' ')
     const markerEl = marker ? <div className='Marker'>{marker}</div> : null;
 
     return (
         <div key={index} className={className}>
             {markerEl}
-            <div className="Text">{answer}</div>
+            <div className="Text">{answerText}</div>
             {markerEl}
         </div>
     );
 }
 
-function actullyDrawHeart(ctx) {
+function drawHeart(ctx) {
     // Ripped off from stack overflow answer: https://stackoverflow.com/a/58333880
     var x = 0;
     var y = 0;
@@ -89,7 +91,7 @@ export default ({ gameState }) => {
             <Confetti
                 numberOfPieces={isCorrect() ? 20 : 0}
                 gravity={isCorrect() ? 0.1 : 0.9}
-                drawShape={actullyDrawHeart} 
+                drawShape={drawHeart} 
                 width={width}
                 height={height}
                 />

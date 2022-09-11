@@ -11,15 +11,48 @@ logger:
     
 binary_sensor:
   - platform: gpio
-    pin: 16
+    pin:
+      number: 22
+      inverted: true
+      mode:
+        input: true
+        pullup: true
     name: "Ball Sensor 0"
     id: ball_sensor_0
     device_class: motion
-    filters:
-      - invert:
     on_press:
       then:
         - logger.log:
             # we'll look for this pattern in the serial output for detecting the ball
             tag: BallDetected
             format: "Ball(0)"
+  - platform: gpio
+    pin:
+      number: 5
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "Ball Sensor 1"
+    id: ball_sensor_1
+    device_class: motion
+    on_press:
+      then:
+        - logger.log:
+            tag: BallDetected
+            format: "Ball(1)"
+  - platform: gpio
+    pin: 
+      number: 26
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    name: "Ball Sensor 2"
+    id: ball_sensor_2
+    device_class: motion
+    on_press:
+      then:
+        - logger.log:
+            tag: BallDetected
+            format: "Ball(2)"

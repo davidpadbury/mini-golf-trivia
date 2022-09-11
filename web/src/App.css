@@ -58,15 +58,16 @@ body {
 }
 
 .Answers .Answer.AnswerA {
-  background-color: red;
+  background-color: blue;
 }
 
 .Answers .Answer.AnswerB {
-  background-color: green;
+  background-color: white;
+  color: black;
 }
 
 .Answers .Answer.AnswerC {
-  background-color: blue;
+  background-color: red;
 }
 
 .Answers .Answer.Disabled {

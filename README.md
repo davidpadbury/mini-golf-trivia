@@ -1,7 +1,7 @@
 # Mini Golf Trivia
 
 A bit hard to explain this one. 
-Some friends were getting married who were into both golf and trivia, somehow this became an idea - so I built it.
+Some friends were getting married who were into both golf and trivia, and wanted some game thing for their wedding reception. Somehow this became an idea - so I built it (with a lot of wood related help from Mike Flaherty).
 
 ![Mini Golf Trivia](doc/images/golf-hole.jpg)
 
